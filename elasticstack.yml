@@ -1,0 +1,20 @@
+---
+- name: Install and Configure Elastic Stack
+  hosts: centos, ubuntu
+  become: yes
+
+  tasks:
+    - name: Include Elasticsearch role
+      include_role:
+        name: elasticsearch
+      when: "'elasticsearch' in elastic_stack_services"
+
+    - name: Include Kibana role
+      include_role:
+        name: kibana
+      when: "'kibana' in elastic_stack_services"
+
+    - name: Include Logstash role
+      include_role:
+        name: logstash
+      when: "'logstash' in elastic_stack_services"
